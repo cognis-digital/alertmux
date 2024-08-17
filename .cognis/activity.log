@@ -40,3 +40,4 @@
 2024-06-30T09:03:33  perf(parser): handle empty and malformed input
 2024-07-22T16:20:40  build(docs): document the config keys
 2024-07-26T11:37:47  build(docs): clarify the README quickstart
+2024-08-17T18:54:54  docs(cli): add a fast path for the common case
