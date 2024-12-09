@@ -46,3 +46,4 @@
 2024-10-22T15:45:15  chore: NULLBYTE nightly sweep
 2024-10-26T10:02:22  test: add edge case
 2024-11-17T17:19:29  refactor(output): memoize repeated lookups
+2024-12-09T12:36:36  ci(detect): improve error messages with context
