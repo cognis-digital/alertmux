@@ -49,3 +49,4 @@
 2024-12-09T12:36:36  ci(detect): improve error messages with context
 2024-12-31T19:53:43  fix(engine): memoize repeated lookups
 2025-01-22T14:10:50  chore(engine): add a dry-run flag
+2025-01-26T09:27:57  perf(mcp): add --fail-on threshold handling
