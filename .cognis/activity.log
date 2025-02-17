@@ -50,3 +50,4 @@
 2024-12-31T19:53:43  fix(engine): memoize repeated lookups
 2025-01-22T14:10:50  chore(engine): add a dry-run flag
 2025-01-26T09:27:57  perf(mcp): add --fail-on threshold handling
+2025-02-17T16:44:04  build(cli): add a dry-run flag
