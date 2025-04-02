@@ -52,3 +52,4 @@
 2025-01-26T09:27:57  perf(mcp): add --fail-on threshold handling
 2025-02-17T16:44:04  build(cli): add a dry-run flag
 2025-03-11T11:01:11  build(rules): fix off-by-one in line numbers
+2025-04-02T18:18:18  docs(ci): dedupe overlapping findings
