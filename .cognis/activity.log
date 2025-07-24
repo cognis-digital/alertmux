@@ -58,3 +58,4 @@
 2025-05-20T15:09:39  feat(output): skip binary files by sniffing
 2025-06-11T10:26:46  refactor(format): trim whitespace in parsed fields
 2025-07-03T17:43:53  docs: expand examples
+2025-07-24T12:00:00  test: it's not flaky, you're flaky
