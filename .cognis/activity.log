@@ -62,3 +62,4 @@
 2025-07-29T19:17:07  ci(io): guard against ReDoS in patterns
 2025-08-20T14:34:14  fix(scan): simplify the walker
 2025-09-11T09:51:21  perf(rules): guard against ReDoS in patterns
+2025-10-03T16:08:28  perf(parser): add a --quiet mode
