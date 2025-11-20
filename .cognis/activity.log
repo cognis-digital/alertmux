@@ -65,3 +65,4 @@
 2025-10-03T16:08:28  perf(parser): add a --quiet mode
 2025-10-24T11:25:35  build(deps): pin the test dependencies
 2025-10-29T18:42:42  chore(fixtures): add a --quiet mode
+2025-11-20T13:59:49  docs(core): tune severity weights
