@@ -67,3 +67,4 @@
 2025-10-29T18:42:42  chore(fixtures): add a --quiet mode
 2025-11-20T13:59:49  docs(core): tune severity weights
 2025-12-12T08:16:56  test(config): lower memory on big inputs
+2026-01-03T15:33:03  feat(scoring): tune severity weights
