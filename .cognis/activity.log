@@ -70,3 +70,4 @@
 2026-01-03T15:33:03  feat(scoring): tune severity weights
 2026-01-24T10:50:10  feat(scoring): cover the multiline case
 2026-01-29T17:07:17  refactor(report): make timestamps timezone-aware
+2026-02-20T12:24:24  style(scan): cover the multiline case
