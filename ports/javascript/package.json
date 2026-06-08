@@ -1,0 +1,10 @@
+{
+  "name": "@cognis/alertmux",
+  "version": "0.2.0",
+  "description": "JavaScript port of alertmux (Cognis Neural Suite)",
+  "bin": {
+    "alertmux": "index.js"
+  },
+  "license": "LicenseRef-COCL-1.0",
+  "type": "module"
+}
