@@ -1,29 +1,11 @@
-"""ALERTMUX - Alert dedup, correlation, and routing in front of Grafana / PagerDuty.
-
-AIOps-lite: takes a stream of raw alerts (Grafana/Alertmanager-style JSON) and
-collapses noise into a small set of actionable, routed incidents.
-"""
-from .core import (
-    Alert,
-    Incident,
-    RoutingRule,
-    Engine,
-    load_alerts,
-    load_rules,
-    DEFAULT_RULES,
-)
-
-TOOL_NAME = "alertmux"
-TOOL_VERSION = "1.0.0"
-
-__all__ = [
-    "Alert",
-    "Incident",
-    "RoutingRule",
-    "Engine",
-    "load_alerts",
-    "load_rules",
-    "DEFAULT_RULES",
-    "TOOL_NAME",
-    "TOOL_VERSION",
-]
+"""alertmux — part of the Cognis Neural Suite."""
+try:  # re-export the tool's public API + identity from core
+    from alertmux.core import *  # noqa: F401,F403
+except Exception:  # pragma: no cover
+    pass
+try:
+    from alertmux.core import TOOL_NAME, TOOL_VERSION
+except Exception:  # pragma: no cover
+    TOOL_NAME = "alertmux"
+    TOOL_VERSION = "0.1.0"
+__version__ = TOOL_VERSION
