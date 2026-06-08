@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: alertmux, labels: { app: alertmux } }
+spec:
+  replicas: 1
+  selector: { matchLabels: { app: alertmux } }
+  template:
+    metadata: { labels: { app: alertmux } }
+    spec:
+      containers:
+        - name: alertmux
+          image: ghcr.io/cognis-digital/alertmux:latest
+          ports: [{ containerPort: 8000 }]
+          resources:
+            requests: { cpu: "50m", memory: "64Mi" }
+            limits: { cpu: "500m", memory: "256Mi" }
+---
+apiVersion: v1
+kind: Service
+metadata: { name: alertmux }
+spec:
+  selector: { app: alertmux }
+  ports: [{ port: 80, targetPort: 8000 }]
