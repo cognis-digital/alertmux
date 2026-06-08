@@ -121,7 +121,17 @@ Pipes into your stack: **SARIF** for code-scanning, **JSON** for anything, an **
 <div align="right"><a href="#top">↑ back to top</a></div>
 
 <a name="install-anywhere"></a>
-## Install anywhere
+## Install — every way, every platform
+
+```bash
+pip install "git+https://github.com/cognis-digital/alertmux.git"    # pip (works today)
+pipx install "git+https://github.com/cognis-digital/alertmux.git"   # isolated CLI
+uv tool install "git+https://github.com/cognis-digital/alertmux.git" # uv
+pip install cognis-alertmux                                          # PyPI (when published)
+docker run --rm ghcr.io/cognis-digital/alertmux:latest --help        # Docker
+brew install cognis-digital/tap/alertmux                             # Homebrew tap
+curl -fsSL https://raw.githubusercontent.com/cognis-digital/alertmux/main/install.sh | sh
+```
 
 | Linux | macOS | Windows | Docker | Cloud |
 |---|---|---|---|---|
