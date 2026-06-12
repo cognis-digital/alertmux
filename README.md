@@ -16,7 +16,7 @@
 </div>
 
 ```bash
-pip install cognis-alertmux
+pip install "git+https://github.com/cognis-digital/alertmux.git"
 alertmux scan .            # → prioritized findings in seconds
 ```
 
@@ -47,7 +47,7 @@ AIOps-lite
 ## Quick start
 
 ```bash
-pip install cognis-alertmux
+pip install "git+https://github.com/cognis-digital/alertmux.git"
 alertmux --version
 alertmux scan .                       # scan current project
 alertmux scan . --format json         # machine-readable
