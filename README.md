@@ -20,6 +20,12 @@ pip install "git+https://github.com/cognis-digital/alertmux.git"
 alertmux scan .            # → prioritized findings in seconds
 ```
 
+<!-- cognis:layman:start -->
+## What is this?
+
+alertmux sits between your monitoring tools (like Grafana or PagerDuty) and your on-call team, acting as a smart filter. When dozens of related alerts fire at once — say, a database goes down and triggers alerts on every service that depends on it — alertmux collapses them into one incident instead of waking up your team twenty times. It deduplicates repeated alerts, groups related ones together, and routes the result to the right channel (Slack, PagerDuty, or wherever you choose) based on simple rules you define. It is aimed at DevOps and platform engineers who want to reduce alert noise without paying for a heavyweight AIOps platform.
+<!-- cognis:layman:end -->
+
 ## Contents
 
 - [Why alertmux?](#why) · [Features](#features) · [Quick start](#quick-start) · [Example](#example) · [Architecture](#architecture) · [AI stack](#ai-stack) · [How it compares](#how-it-compares) · [Integrations](#integrations) · [Install anywhere](#install-anywhere) · [Related](#related) · [Contributing](#contributing)
@@ -44,6 +50,42 @@ AIOps-lite
 <div align="right"><a href="#top">↑ back to top</a></div>
 
 <a name="quick-start"></a>
+<!-- cognis:install:start -->
+## Install
+
+`alertmux` is source-available (not published to PyPI) — every method below installs
+straight from GitHub. Pick whichever you prefer; the one-line scripts auto-detect
+the best tool available on your machine.
+
+**One-liner (Linux / macOS):**
+```sh
+curl -fsSL https://raw.githubusercontent.com/cognis-digital/alertmux/HEAD/install.sh | sh
+```
+
+**One-liner (Windows PowerShell):**
+```powershell
+irm https://raw.githubusercontent.com/cognis-digital/alertmux/HEAD/install.ps1 | iex
+```
+
+**Or install manually — any one of:**
+```sh
+pipx install "git+https://github.com/cognis-digital/alertmux.git"     # isolated (recommended)
+uv tool install "git+https://github.com/cognis-digital/alertmux.git"  # uv
+pip install "git+https://github.com/cognis-digital/alertmux.git"      # pip
+```
+
+**From source:**
+```sh
+git clone https://github.com/cognis-digital/alertmux.git
+cd alertmux && pip install .
+```
+
+Then run:
+```sh
+alertmux --help
+```
+<!-- cognis:install:end -->
+
 ## Quick start
 
 ```bash
