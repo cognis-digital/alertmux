@@ -20,6 +20,33 @@ pip install cognis-alertmux
 alertmux scan .            # → prioritized findings in seconds
 ```
 
+## Usage — step by step
+
+`alertmux` is AIOps-lite alert handling: it dedups, correlates, and routes raw alerts into incidents.
+
+1. **Install** (Python 3.10+):
+   ```bash
+   pip install -e .            # or: pipx install alertmux
+   ```
+2. **Run the full pipeline** (dedup + correlate + route) over a raw alert file:
+   ```bash
+   alertmux mux demos/01-basic/alerts.json
+   ```
+3. **Use custom routing rules** and a correlation window:
+   ```bash
+   alertmux mux alerts.json --rules rules.json --format json
+   alertmux rules --rules rules.json          # print the active rules
+   ```
+4. **View the noise-reduction (dedup) buckets only**, including from stdin:
+   ```bash
+   cat alerts.json | alertmux dedup -
+   ```
+5. **Read the output** in CI / a pipeline — the JSON `summary` reports `incidents`, `paging`, and `noise_reduction_pct`:
+   ```bash
+   alertmux mux alerts.json --format json | jq '.summary.noise_reduction_pct'
+   ```
+
+
 ## Contents
 
 - [Why alertmux?](#why) · [Features](#features) · [Quick start](#quick-start) · [Example](#example) · [Architecture](#architecture) · [AI stack](#ai-stack) · [How it compares](#how-it-compares) · [Integrations](#integrations) · [Install anywhere](#install-anywhere) · [Related](#related) · [Contributing](#contributing)
