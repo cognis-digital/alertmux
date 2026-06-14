@@ -24,7 +24,11 @@ from .core import Engine, load_alerts, load_rules, DEFAULT_RULES
 
 
 def _read(path: str) -> Any:
-    text = sys.stdin.read() if path == "-" else open(path, encoding="utf-8").read()
+    if path == "-":
+        text = sys.stdin.read()
+    else:
+        with open(path, encoding="utf-8") as fh:
+            text = fh.read()
     return json.loads(text)
 
 
@@ -65,6 +69,8 @@ def _print_table(obj: Any) -> None:
 
 
 def _build_engine(args: argparse.Namespace) -> Engine:
+    if getattr(args, "window", 0) < 0:
+        raise ValueError(f"--window must be >= 0, got {args.window}")
     rules = load_rules(_read(args.rules)) if getattr(args, "rules", None) else list(DEFAULT_RULES)
     return Engine(rules=rules, correlation_window_sec=args.window)
 

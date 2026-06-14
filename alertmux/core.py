@@ -173,8 +173,17 @@ class _Dedup:
 class Engine:
     def __init__(self, rules: list[RoutingRule] | None = None,
                  correlation_window_sec: int = 300):
+        if not isinstance(correlation_window_sec, (int, float)):
+            raise TypeError(
+                "correlation_window_sec must be a number, "
+                f"got {type(correlation_window_sec).__name__}"
+            )
+        if correlation_window_sec < 0:
+            raise ValueError(
+                f"correlation_window_sec must be >= 0, got {correlation_window_sec}"
+            )
         self.rules = rules if rules is not None else list(DEFAULT_RULES)
-        self.correlation_window_sec = correlation_window_sec
+        self.correlation_window_sec = int(correlation_window_sec)
 
     def dedup(self, alerts: Iterable[Alert]) -> dict[str, _Dedup]:
         buckets: dict[str, _Dedup] = {}

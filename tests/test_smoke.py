@@ -114,5 +114,77 @@ class TestCLI(unittest.TestCase):
             os.unlink(path)
 
 
+class TestHardening(unittest.TestCase):
+    """Tests for error handling and edge-case robustness added during hardening."""
+
+    # --- Engine input validation ---
+
+    def test_negative_window_raises(self):
+        with self.assertRaises(ValueError):
+            Engine(correlation_window_sec=-1)
+
+    def test_non_numeric_window_raises(self):
+        with self.assertRaises(TypeError):
+            Engine(correlation_window_sec="5m")  # type: ignore[arg-type]
+
+    # --- load_alerts edge cases ---
+
+    def test_load_alerts_empty_list(self):
+        """Empty list produces empty result without error."""
+        self.assertEqual(load_alerts([]), [])
+
+    def test_load_alerts_non_dict_items_skipped(self):
+        """Non-dict items inside the list are silently filtered."""
+        alerts = load_alerts([{"name": "real"}, "string", None, 42])
+        self.assertEqual(len(alerts), 1)
+        self.assertEqual(alerts[0].name, "real")
+
+    def test_load_alerts_invalid_type_raises(self):
+        """An integer at the top level raises ValueError."""
+        with self.assertRaises(ValueError):
+            load_alerts(42)
+
+    def test_load_alerts_string_raises(self):
+        """A bare string at the top level raises ValueError."""
+        with self.assertRaises(ValueError):
+            load_alerts("not an alert")
+
+    # --- CLI error paths ---
+
+    def test_negative_window_cli_returns_nonzero(self):
+        rc = main(["mux", DEMO, "--window", "-5"])
+        self.assertNotEqual(rc, 0)
+
+    def test_empty_alerts_file_succeeds(self):
+        """An empty alerts array is valid — zero incidents, zero errors."""
+        import tempfile
+        with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as f:
+            json.dump([], f)
+            path = f.name
+        try:
+            self.assertEqual(main(["--format", "json", "mux", path]), 0)
+        finally:
+            os.unlink(path)
+
+    def test_rules_file_wrong_shape_returns_nonzero(self):
+        """A rules file with a plain string (not a list/object) must fail cleanly."""
+        import tempfile
+        with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as f:
+            json.dump("bad", f)
+            path = f.name
+        try:
+            self.assertNotEqual(main(["mux", DEMO, "--rules", path]), 0)
+        finally:
+            os.unlink(path)
+
+    # --- mcp_server module importability ---
+
+    def test_mcp_server_importable(self):
+        """mcp_server must be importable without an ImportError
+        (the MCP library may be absent, but the module itself must load)."""
+        import alertmux.mcp_server as mcp_mod
+        self.assertTrue(callable(mcp_mod.serve))
+
+
 if __name__ == "__main__":
     unittest.main()
