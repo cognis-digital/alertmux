@@ -34,3 +34,6 @@ alertmux = "alertmux.cli:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["alertmux"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
