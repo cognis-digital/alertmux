@@ -1,0 +1,8 @@
+{
+  "alerts": [
+    {"labels": {"alertname": "RedisReplicationBroken", "service": "sessions", "team": "database", "instance": "redis-2", "severity": "error"}, "annotations": {"summary": "Replica lost link to master"}, "status": "firing", "startsAt": "2026-06-16T11:30:00Z"},
+    {"labels": {"alertname": "RedisHighMemory", "service": "sessions", "team": "database", "instance": "redis-2", "severity": "warning"}, "annotations": {"summary": "maxmemory 92% used"}, "status": "firing", "startsAt": "2026-06-16T11:30:40Z"},
+    {"labels": {"alertname": "CertExpiringSoon", "service": "api-gateway", "team": "platform", "severity": "warning"}, "annotations": {"summary": "TLS cert for api.example.com expires in 6 days"}, "status": "firing", "startsAt": "2026-06-16T11:31:00Z"},
+    {"labels": {"alertname": "DiskWillFillIn4h", "service": "warehouse", "team": "data", "instance": "etl-runner-1", "severity": "error"}, "annotations": {"summary": "Predicted disk full in 4h on /var/lib/clickhouse"}, "status": "firing", "startsAt": "2026-06-16T11:32:00Z"}
+  ]
+}

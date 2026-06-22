@@ -1,0 +1,8 @@
+{
+  "alerts": [
+    {"labels": {"alertname": "KafkaUnderReplicated", "service": "events-bus", "host": "kafka-3", "severity": "error"}, "annotations": {"summary": "12 under-replicated partitions"}, "status": "firing", "startsAt": "2026-06-19T16:00:00Z"},
+    {"labels": {"alertname": "KafkaUnderReplicated", "service": "events-bus", "host": "kafka-3", "severity": "error"}, "status": "firing", "startsAt": "2026-06-19T16:00:30Z"},
+    {"labels": {"alertname": "KafkaConsumerLag", "service": "events-bus", "host": "kafka-3", "severity": "warning"}, "annotations": {"summary": "consumer group analytics lag 1.2M"}, "status": "firing", "startsAt": "2026-06-19T16:01:00Z"},
+    {"labels": {"alertname": "KafkaConsumerLag", "service": "events-bus", "host": "kafka-3", "severity": "warning"}, "status": "firing", "startsAt": "2026-06-19T16:01:30Z"}
+  ]
+}

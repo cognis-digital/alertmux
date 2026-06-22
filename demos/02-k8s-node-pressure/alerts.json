@@ -1,0 +1,11 @@
+{
+  "alerts": [
+    {"labels": {"alertname": "KubeNodeNotReady", "namespace": "kube-system", "node": "ip-10-0-3-14", "region": "us-east-1", "severity": "critical"}, "annotations": {"summary": "Node ip-10-0-3-14 has been unready for >5m"}, "status": "firing", "startsAt": "2026-06-12T09:14:00Z"},
+    {"labels": {"alertname": "KubeNodeNotReady", "namespace": "kube-system", "node": "ip-10-0-3-14", "region": "us-east-1", "severity": "critical"}, "status": "firing", "startsAt": "2026-06-12T09:14:30Z"},
+    {"labels": {"alertname": "KubeNodeMemoryPressure", "namespace": "kube-system", "node": "ip-10-0-3-14", "region": "us-east-1", "severity": "error"}, "annotations": {"summary": "MemoryPressure condition on node"}, "status": "firing", "startsAt": "2026-06-12T09:14:10Z"},
+    {"labels": {"alertname": "KubePodCrashLooping", "namespace": "kube-system", "node": "ip-10-0-3-14", "pod": "kube-proxy-7f2x", "region": "us-east-1", "severity": "error"}, "annotations": {"summary": "kube-proxy restarting repeatedly"}, "status": "firing", "startsAt": "2026-06-12T09:15:00Z"},
+    {"labels": {"alertname": "KubePodCrashLooping", "namespace": "kube-system", "node": "ip-10-0-3-14", "pod": "kube-proxy-7f2x", "region": "us-east-1", "severity": "error"}, "status": "firing", "startsAt": "2026-06-12T09:15:30Z"},
+    {"labels": {"alertname": "KubeletTooManyPods", "namespace": "kube-system", "node": "ip-10-0-3-14", "region": "us-east-1", "severity": "warning"}, "annotations": {"summary": "Kubelet running 109/110 pods"}, "status": "firing", "startsAt": "2026-06-12T09:15:10Z"},
+    {"labels": {"alertname": "KubeNodeNotReady", "namespace": "kube-system", "node": "ip-10-0-3-14", "region": "us-east-1", "severity": "critical"}, "status": "resolved", "startsAt": "2026-06-12T09:21:00Z"}
+  ]
+}

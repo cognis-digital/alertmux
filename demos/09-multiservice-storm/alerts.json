@@ -1,0 +1,424 @@
+{
+  "alerts": [
+    {
+      "labels": {
+        "alertname": "CoreDNSResolveErrors",
+        "service": "resolver-core",
+        "severity": "critical",
+        "instance": "coredns-1",
+        "namespace": "kube-system"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:00:00Z",
+      "annotations": {
+        "summary": "CoreDNS SERVFAIL rate spiking"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "CoreDNSResolveErrors",
+        "service": "resolver-core",
+        "severity": "critical",
+        "instance": "coredns-1",
+        "namespace": "kube-system"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:00:20Z",
+      "annotations": {
+        "summary": "CoreDNS SERVFAIL rate spiking"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "CoreDNSResolveErrors",
+        "service": "resolver-core",
+        "severity": "critical",
+        "instance": "coredns-1",
+        "namespace": "kube-system"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:00:40Z",
+      "annotations": {
+        "summary": "CoreDNS SERVFAIL rate spiking"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "CoreDNSResolveErrors",
+        "service": "resolver-core",
+        "severity": "critical",
+        "instance": "coredns-1",
+        "namespace": "kube-system"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:01:00Z",
+      "annotations": {
+        "summary": "CoreDNS SERVFAIL rate spiking"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "CoreDNSResolveErrors",
+        "service": "resolver-core",
+        "severity": "critical",
+        "instance": "coredns-1",
+        "namespace": "kube-system"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:01:20Z",
+      "annotations": {
+        "summary": "CoreDNS SERVFAIL rate spiking"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "CoreDNSResolveErrors",
+        "service": "resolver-core",
+        "severity": "critical",
+        "instance": "coredns-1",
+        "namespace": "kube-system"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:01:40Z",
+      "annotations": {
+        "summary": "CoreDNS SERVFAIL rate spiking"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "UpstreamConnectionFailed",
+        "service": "catalog",
+        "severity": "error",
+        "namespace": "shop"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:00:30Z",
+      "annotations": {
+        "summary": "catalog cannot reach dependencies"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "UpstreamConnectionFailed",
+        "service": "catalog",
+        "severity": "error",
+        "namespace": "shop"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:00:55Z",
+      "annotations": {
+        "summary": "catalog cannot reach dependencies"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "UpstreamConnectionFailed",
+        "service": "catalog",
+        "severity": "error",
+        "namespace": "shop"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:01:20Z",
+      "annotations": {
+        "summary": "catalog cannot reach dependencies"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "UpstreamConnectionFailed",
+        "service": "catalog",
+        "severity": "error",
+        "namespace": "shop"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:01:45Z",
+      "annotations": {
+        "summary": "catalog cannot reach dependencies"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "UpstreamConnectionFailed",
+        "service": "catalog",
+        "severity": "error",
+        "namespace": "shop"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:02:10Z",
+      "annotations": {
+        "summary": "catalog cannot reach dependencies"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "LatencyHigh",
+        "service": "catalog",
+        "severity": "warning",
+        "namespace": "shop"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:00:40Z",
+      "annotations": {
+        "summary": "catalog p99 latency elevated"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "LatencyHigh",
+        "service": "catalog",
+        "severity": "warning",
+        "namespace": "shop"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:01:10Z",
+      "annotations": {
+        "summary": "catalog p99 latency elevated"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "LatencyHigh",
+        "service": "catalog",
+        "severity": "warning",
+        "namespace": "shop"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:01:40Z",
+      "annotations": {
+        "summary": "catalog p99 latency elevated"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "UpstreamConnectionFailed",
+        "service": "cart",
+        "severity": "error",
+        "namespace": "shop"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:00:30Z",
+      "annotations": {
+        "summary": "cart cannot reach dependencies"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "UpstreamConnectionFailed",
+        "service": "cart",
+        "severity": "error",
+        "namespace": "shop"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:00:55Z",
+      "annotations": {
+        "summary": "cart cannot reach dependencies"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "UpstreamConnectionFailed",
+        "service": "cart",
+        "severity": "error",
+        "namespace": "shop"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:01:20Z",
+      "annotations": {
+        "summary": "cart cannot reach dependencies"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "UpstreamConnectionFailed",
+        "service": "cart",
+        "severity": "error",
+        "namespace": "shop"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:01:45Z",
+      "annotations": {
+        "summary": "cart cannot reach dependencies"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "UpstreamConnectionFailed",
+        "service": "cart",
+        "severity": "error",
+        "namespace": "shop"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:02:10Z",
+      "annotations": {
+        "summary": "cart cannot reach dependencies"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "LatencyHigh",
+        "service": "cart",
+        "severity": "warning",
+        "namespace": "shop"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:00:40Z",
+      "annotations": {
+        "summary": "cart p99 latency elevated"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "LatencyHigh",
+        "service": "cart",
+        "severity": "warning",
+        "namespace": "shop"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:01:10Z",
+      "annotations": {
+        "summary": "cart p99 latency elevated"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "LatencyHigh",
+        "service": "cart",
+        "severity": "warning",
+        "namespace": "shop"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:01:40Z",
+      "annotations": {
+        "summary": "cart p99 latency elevated"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "UpstreamConnectionFailed",
+        "service": "recommendations",
+        "severity": "error",
+        "namespace": "shop"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:00:30Z",
+      "annotations": {
+        "summary": "recommendations cannot reach dependencies"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "UpstreamConnectionFailed",
+        "service": "recommendations",
+        "severity": "error",
+        "namespace": "shop"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:00:55Z",
+      "annotations": {
+        "summary": "recommendations cannot reach dependencies"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "UpstreamConnectionFailed",
+        "service": "recommendations",
+        "severity": "error",
+        "namespace": "shop"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:01:20Z",
+      "annotations": {
+        "summary": "recommendations cannot reach dependencies"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "UpstreamConnectionFailed",
+        "service": "recommendations",
+        "severity": "error",
+        "namespace": "shop"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:01:45Z",
+      "annotations": {
+        "summary": "recommendations cannot reach dependencies"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "UpstreamConnectionFailed",
+        "service": "recommendations",
+        "severity": "error",
+        "namespace": "shop"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:02:10Z",
+      "annotations": {
+        "summary": "recommendations cannot reach dependencies"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "LatencyHigh",
+        "service": "recommendations",
+        "severity": "warning",
+        "namespace": "shop"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:00:40Z",
+      "annotations": {
+        "summary": "recommendations p99 latency elevated"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "LatencyHigh",
+        "service": "recommendations",
+        "severity": "warning",
+        "namespace": "shop"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:01:10Z",
+      "annotations": {
+        "summary": "recommendations p99 latency elevated"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "LatencyHigh",
+        "service": "recommendations",
+        "severity": "warning",
+        "namespace": "shop"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:01:40Z",
+      "annotations": {
+        "summary": "recommendations p99 latency elevated"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "CronJobLate",
+        "service": "billing-batch",
+        "severity": "warning",
+        "namespace": "jobs"
+      },
+      "status": "firing",
+      "startsAt": "2026-06-20T03:02:00Z",
+      "annotations": {
+        "summary": "nightly invoice job 10m late"
+      }
+    },
+    {
+      "labels": {
+        "alertname": "CoreDNSResolveErrors",
+        "service": "resolver-core",
+        "severity": "critical",
+        "instance": "coredns-1",
+        "namespace": "kube-system"
+      },
+      "status": "resolved",
+      "startsAt": "2026-06-20T03:10:00Z"
+    }
+  ]
+}

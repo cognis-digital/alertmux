@@ -1,0 +1,7 @@
+[
+  {"name": "PaymentGatewayTimeout", "labels": {"service": "payments"}, "severity": "sev1", "status": "firing", "startsAt": "2026-06-19T13:00:00Z", "summary": "card processor timing out"},
+  {"name": "PaymentRetryStorm", "labels": {"service": "payments"}, "severity": "page", "status": "firing", "startsAt": "2026-06-19T13:00:20Z"},
+  {"name": "QueueBacklogGrowing", "labels": {"service": "payments"}, "severity": "warn", "status": "firing", "startsAt": "2026-06-19T13:01:00Z"},
+  {"name": "DebugLogNoise", "labels": {"service": "payments"}, "severity": "notice", "status": "firing", "startsAt": "2026-06-19T13:01:30Z"},
+  {"name": "PaymentGatewayTimeout", "labels": {"service": "payments"}, "severity": "crit", "status": "resolved", "startsAt": "2026-06-19T13:08:00Z"}
+]

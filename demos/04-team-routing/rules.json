@@ -1,0 +1,8 @@
+{
+  "rules": [
+    {"name": "db-team-page", "receiver": "pagerduty-dba", "match": {"team": "database"}, "min_severity": "error", "page": true},
+    {"name": "data-team", "receiver": "slack-data-eng", "match": {"team": "data"}, "min_severity": "warning", "page": false},
+    {"name": "platform-team", "receiver": "slack-platform", "match": {"team": "platform"}, "min_severity": "warning", "page": false},
+    {"name": "catch-all", "receiver": "slack-noise", "match": {}, "min_severity": "info", "page": false}
+  ]
+}

@@ -20,7 +20,7 @@ import sys
 from typing import Any
 
 from . import TOOL_NAME, TOOL_VERSION
-from .core import Engine, load_alerts, load_rules, DEFAULT_RULES
+from .core import Engine, load_alerts, load_rules, DEFAULT_RULES, to_sarif
 
 
 def _read(path: str) -> Any:
@@ -76,6 +76,10 @@ def _cmd_mux(args: argparse.Namespace) -> int:
     events = sum(1 for _ in alerts)
     paging = sum(1 for i in incidents if i.page)
     reduction = round((1 - len(incidents) / events) * 100, 1) if events else 0.0
+    if args.format == "sarif":
+        print(json.dumps(to_sarif(incidents, TOOL_NAME, TOOL_VERSION),
+                         indent=2, default=str))
+        return 0
     out = {
         "summary": {
             "events": events,
@@ -114,26 +118,39 @@ def _cmd_rules(args: argparse.Namespace) -> int:
     return 0
 
 
+_FORMATS = ["table", "json", "sarif"]
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog=TOOL_NAME,
                                 description="Alert dedup, correlation, and routing (AIOps-lite).")
     p.add_argument("--version", action="version", version=f"{TOOL_NAME} {TOOL_VERSION}")
-    p.add_argument("--format", choices=["table", "json"], default="table")
+    p.add_argument("--format", choices=_FORMATS, default="table")
     sub = p.add_subparsers(dest="command", required=True)
+
+    # --format is accepted both before AND after the subcommand. The
+    # subcommand-level copy uses SUPPRESS as its default so that omitting it
+    # leaves the global value intact rather than resetting it to "table".
+    def add_format(parser: argparse.ArgumentParser) -> None:
+        parser.add_argument("--format", choices=_FORMATS, default=argparse.SUPPRESS,
+                            dest="format", help="output format (table|json|sarif)")
 
     m = sub.add_parser("mux", help="dedup + correlate + route into incidents")
     m.add_argument("input", help="alerts JSON file, or - for stdin")
     m.add_argument("--rules", help="routing rules JSON file (defaults built in)")
     m.add_argument("--window", type=int, default=300, help="correlation window seconds")
+    add_format(m)
     m.set_defaults(func=_cmd_mux)
 
     d = sub.add_parser("dedup", help="show dedup buckets only")
     d.add_argument("input", help="alerts JSON file, or - for stdin")
     d.add_argument("--window", type=int, default=300)
+    add_format(d)
     d.set_defaults(func=_cmd_dedup)
 
     r = sub.add_parser("rules", help="print active routing rules")
     r.add_argument("--rules", help="routing rules JSON file (defaults built in)")
+    add_format(r)
     r.set_defaults(func=_cmd_rules)
     return p
 

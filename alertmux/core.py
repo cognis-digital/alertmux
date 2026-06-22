@@ -288,3 +288,89 @@ def load_rules(raw: Any) -> list[RoutingRule]:
     if not isinstance(raw, list):
         raise ValueError("rules input must be a list or an object with a 'rules' list")
     return [RoutingRule.from_raw(r) for r in raw if isinstance(r, dict)]
+
+
+# --- SARIF 2.1.0 export -------------------------------------------------------
+# Map alertmux severities onto SARIF result levels. SARIF only has
+# error/warning/note/none, so error+critical -> "error".
+_SARIF_LEVEL = {"critical": "error", "error": "error",
+                "warning": "warning", "info": "note"}
+# SARIF security-severity is a 0.0-10.0 string (CVSS-like) used by GitHub
+# code-scanning to bucket results.
+_SARIF_SECURITY_SEVERITY = {"critical": "9.0", "error": "7.0",
+                            "warning": "4.0", "info": "1.0"}
+
+
+def to_sarif(incidents: list["Incident"],
+             tool_name: str = "alertmux",
+             tool_version: str = "0.0.0") -> dict[str, Any]:
+    """Render incidents as a SARIF 2.1.0 log.
+
+    Each incident becomes one SARIF `result`; each distinct alert name that
+    fed the incident is registered once as a reporting-descriptor `rule`. The
+    incident's correlation key is surfaced as the result's logical location so
+    a code-scanning UI can group by service/host. Output validates against the
+    OASIS SARIF 2.1.0 schema.
+    """
+    rules_index: dict[str, int] = {}
+    sarif_rules: list[dict[str, Any]] = []
+    results: list[dict[str, Any]] = []
+
+    for inc in incidents:
+        for name in inc.alert_names:
+            if name not in rules_index:
+                rules_index[name] = len(sarif_rules)
+                sarif_rules.append({
+                    "id": name,
+                    "name": name,
+                    "shortDescription": {"text": name},
+                    "defaultConfiguration": {
+                        "level": _SARIF_LEVEL.get(inc.severity, "warning")},
+                })
+        primary = inc.alert_names[0] if inc.alert_names else "incident"
+        msg = inc.summary or (f"{inc.alert_count} alert(s) correlated on "
+                              f"{inc.correlation_key} "
+                              f"({inc.event_count} raw events)")
+        properties = {
+            "incident_id": inc.incident_id,
+            "correlation_key": inc.correlation_key,
+            "status": "resolved" if inc.firing == 0 else "firing",
+            "alert_count": inc.alert_count,
+            "event_count": inc.event_count,
+            "firing": inc.firing,
+            "resolved": inc.resolved,
+            "receiver": inc.receiver,
+            "rule": inc.rule,
+            "page": inc.page,
+            "first_seen": inc.first_seen.isoformat(),
+            "last_seen": inc.last_seen.isoformat(),
+            "security-severity": _SARIF_SECURITY_SEVERITY.get(inc.severity, "0.0"),
+        }
+        results.append({
+            "ruleId": primary,
+            "ruleIndex": rules_index.get(primary, 0),
+            "level": _SARIF_LEVEL.get(inc.severity, "warning"),
+            "message": {"text": msg},
+            "partialFingerprints": {"alertmuxIncidentId": inc.incident_id},
+            "locations": [{
+                "logicalLocations": [{
+                    "name": inc.correlation_key,
+                    "kind": "namespace",
+                }],
+            }],
+            "properties": properties,
+        })
+
+    return {
+        "version": "2.1.0",
+        "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+        "runs": [{
+            "tool": {"driver": {
+                "name": tool_name,
+                "version": tool_version,
+                "informationUri": "https://github.com/cognis-digital/alertmux",
+                "rules": sarif_rules,
+            }},
+            "results": results,
+        }],
+    }

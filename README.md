@@ -17,7 +17,7 @@
 
 ```bash
 pip install cognis-alertmux
-alertmux scan .            # → prioritized findings in seconds
+alertmux mux alerts.json   # → noisy alert storm collapsed into a few incidents
 ```
 
 ## Usage — step by step
@@ -63,8 +63,13 @@ AIOps-lite
 <a name="features"></a>
 ## Features
 
-- ✅ Load Alerts
-- ✅ Load Rules
+- ✅ **Dedup** repeated/flapping alerts by fingerprint (alertname + identity labels)
+- ✅ **Correlate** alerts into incidents by service/host within a time window
+- ✅ **Route** incidents to receivers with ordered, severity-gated rules
+- ✅ Normalizes mixed severity vocabularies (`sev1`/`crit`/`page`/`warn`/`notice`)
+- ✅ Output as **table · JSON · SARIF 2.1.0** (for GitHub code-scanning / CI)
+- ✅ Reads Alertmanager-webhook, bare-list, or single-alert JSON (file or stdin)
+- ✅ 9 real-use-case demos in [`demos/`](demos/) — each with a `SCENARIO.md`
 - ✅ Runs on Linux/macOS/Windows · Docker · devcontainer
 - ✅ Ports in Python, JavaScript, Go, and Rust (`ports/`)
 
@@ -76,10 +81,14 @@ AIOps-lite
 ```bash
 pip install cognis-alertmux
 alertmux --version
-alertmux scan .                       # scan current project
-alertmux scan . --format json         # machine-readable
-alertmux scan . --fail-on high        # CI gate (non-zero exit)
+alertmux mux demos/01-basic/alerts.json            # dedup + correlate + route
+alertmux mux demos/01-basic/alerts.json --format json   # machine-readable
+alertmux mux demos/06-sarif-ci/alerts.json --format sarif > alertmux.sarif  # CI / code-scanning
+alertmux dedup demos/03-flapping-resolved/alerts.json   # noise-reduction view only
+alertmux rules                                     # print the active routing rules
 ```
+
+`--format` works **before or after** the subcommand.
 
 <div align="right"><a href="#top">↑ back to top</a></div>
 
@@ -87,11 +96,51 @@ alertmux scan . --fail-on high        # CI gate (non-zero exit)
 ## Example
 
 ```text
-$ alertmux scan .
-  [HIGH    ] ALE-001  example finding             (./src/app.py)
-  [MEDIUM  ] ALE-002  another signal              (./config.yaml)
+$ alertmux mux demos/01-basic/alerts.json
+events=12  alerts=5  incidents=2  paging=1  noise_reduction=83.3%
+------------------------------------------------------------------------------------
+INCIDENT   SEV      STAT     EVTS RECEIVER       PAGE  KEY
+------------------------------------------------------------------------------------
+INC-39866  critical firing     10 pagerduty      YES  service=payments
+           names=HighErrorRate,LatencySLOburn,PgPoolSaturated,PostgresDown
+INC-71177  warning  firing      2 slack-noise    no   service=checkout
+           names=HighErrorRate
+```
 
-  2 findings · risk score 5 · 38ms
+*(`INC-…` ids are content-derived and will differ between runs.)*
+
+A 12-message pager storm becomes **2 incidents and 1 page**.
+
+### Demos — 9 real-use-case scenarios
+
+Each [`demos/<NN-name>/`](demos/) folder has a real input file and a `SCENARIO.md`
+explaining where the data came from, what to expect, the exact run command, and
+how to act:
+
+| Demo | Shows |
+|---|---|
+| [`01-basic`](demos/01-basic/) | A Postgres cascade: 12 events → 2 incidents → 1 page |
+| [`02-k8s-node-pressure`](demos/02-k8s-node-pressure/) | One bad EKS node fans out into 5 alerts, all `kube-prometheus-stack` labels |
+| [`03-flapping-resolved`](demos/03-flapping-resolved/) | A flapping target (4× fire/resolve) that should **never** page |
+| [`04-team-routing`](demos/04-team-routing/) | Custom `--rules` routing by owning team (DBA pages, others Slack) |
+| [`05-window-split`](demos/05-window-split/) | Same service, two outages 11h apart → two incidents (`--window`) |
+| [`06-sarif-ci`](demos/06-sarif-ci/) | Export incidents as **SARIF 2.1.0** for GitHub code-scanning |
+| [`07-severity-aliases`](demos/07-severity-aliases/) | Mixed severity vocabularies (`sev1`/`crit`/`warn`) normalized |
+| [`08-stdin-pipeline`](demos/08-stdin-pipeline/) | Stream alerts from stdin and gate a pipeline with `jq` |
+| [`09-multiservice-storm`](demos/09-multiservice-storm/) | A DNS root-cause storm: 32 events → 5 incidents (84% noise cut) |
+
+### SARIF 2.1.0 export
+
+`--format sarif` renders incidents as a [SARIF 2.1.0](https://sarifweb.azurewebsites.net/)
+log — one `result` per incident, one reporting-descriptor `rule` per alertname,
+severity mapped to SARIF `level` + `security-severity`, and a stable
+`partialFingerprints.alertmuxIncidentId` so re-runs deduplicate in the UI:
+
+```yaml
+- run: alertmux mux alerts.json --format sarif > alertmux.sarif
+- uses: github/codeql-action/upload-sarif@v3
+  with:
+    sarif_file: alertmux.sarif
 ```
 
 <div align="right"><a href="#top">↑ back to top</a></div>

@@ -1,0 +1,8 @@
+{
+  "alerts": [
+    {"labels": {"alertname": "DeployErrorSpike", "service": "search", "severity": "error"}, "annotations": {"summary": "5xx spike during morning deploy"}, "status": "firing", "startsAt": "2026-06-17T08:05:00Z"},
+    {"labels": {"alertname": "DeployLatencyHigh", "service": "search", "severity": "warning"}, "annotations": {"summary": "p95 latency elevated post-deploy"}, "status": "firing", "startsAt": "2026-06-17T08:06:30Z"},
+    {"labels": {"alertname": "PeakErrorSpike", "service": "search", "severity": "critical"}, "annotations": {"summary": "5xx spike during evening traffic peak"}, "status": "firing", "startsAt": "2026-06-17T19:40:00Z"},
+    {"labels": {"alertname": "PeakLatencyHigh", "service": "search", "severity": "warning"}, "annotations": {"summary": "p95 latency elevated at peak"}, "status": "firing", "startsAt": "2026-06-17T19:41:10Z"}
+  ]
+}

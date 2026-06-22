@@ -1,0 +1,8 @@
+{
+  "alerts": [
+    {"labels": {"alertname": "DeadMansSwitch", "service": "monitoring", "severity": "info"}, "annotations": {"summary": "monitoring pipeline heartbeat"}, "status": "firing", "startsAt": "2026-06-18T00:00:00Z"},
+    {"labels": {"alertname": "BlackboxProbeFailed", "service": "checkout", "instance": "https://checkout.example.com/healthz", "severity": "critical"}, "annotations": {"summary": "synthetic probe to checkout healthz failing"}, "status": "firing", "startsAt": "2026-06-18T00:01:00Z"},
+    {"labels": {"alertname": "BlackboxProbeFailed", "service": "checkout", "instance": "https://checkout.example.com/healthz", "severity": "critical"}, "status": "firing", "startsAt": "2026-06-18T00:01:30Z"},
+    {"labels": {"alertname": "SSLCertExpiringSoon", "service": "checkout", "severity": "warning"}, "annotations": {"summary": "cert expires in 9 days"}, "status": "firing", "startsAt": "2026-06-18T00:02:00Z"}
+  ]
+}
