@@ -1,0 +1,6 @@
+$ alertmux-emit rules
+
+critical-page    -> pagerduty      min_sev=critical page=True match={}
+db-errors        -> db-oncall      min_sev=error    page=True match={'team': 'database'}
+errors           -> slack-alerts   min_sev=error    page=False match={}
+catch-all        -> slack-noise    min_sev=info     page=False match={}

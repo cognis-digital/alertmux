@@ -20,6 +20,48 @@ pip install cognis-alertmux
 alertmux mux alerts.json   # → noisy alert storm collapsed into a few incidents
 ```
 
+
+<!-- cognis:example:start -->
+## 🔎 Example output
+
+Real, reproducible output from the tool — runs offline:
+
+```console
+$ alertmux-emit --version
+alertmux 0.1.0
+```
+
+```console
+$ alertmux-emit --help
+usage: alertmux [-h] [--version] [--format {table,json,sarif}]
+                {mux,dedup,rules} ...
+
+Alert dedup, correlation, and routing (AIOps-lite).
+
+positional arguments:
+  {mux,dedup,rules}
+    mux                 dedup + correlate + route into incidents
+    dedup               show dedup buckets only
+    rules               print active routing rules
+
+options:
+  -h, --help            show this help message and exit
+  --version             show program's version number and exit
+  --format {table,json,sarif}
+```
+
+```console
+$ alertmux-emit rules
+critical-page    -> pagerduty      min_sev=critical page=True match={}
+db-errors        -> db-oncall      min_sev=error    page=True match={'team': 'database'}
+errors           -> slack-alerts   min_sev=error    page=False match={}
+catch-all        -> slack-noise    min_sev=info     page=False match={}
+```
+
+> Blocks above are real `alertmux` output — reproduce them from a clone.
+
+<!-- cognis:example:end -->
+
 ## Usage — step by step
 
 `alertmux` is AIOps-lite alert handling: it dedups, correlates, and routes raw alerts into incidents.

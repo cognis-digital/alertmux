@@ -1,0 +1,3 @@
+$ alertmux-emit --version
+
+alertmux 0.1.0

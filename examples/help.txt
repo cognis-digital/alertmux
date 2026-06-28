@@ -1,0 +1,17 @@
+$ alertmux-emit --help
+
+usage: alertmux [-h] [--version] [--format {table,json,sarif}]
+                {mux,dedup,rules} ...
+
+Alert dedup, correlation, and routing (AIOps-lite).
+
+positional arguments:
+  {mux,dedup,rules}
+    mux                 dedup + correlate + route into incidents
+    dedup               show dedup buckets only
+    rules               print active routing rules
+
+options:
+  -h, --help            show this help message and exit
+  --version             show program's version number and exit
+  --format {table,json,sarif}
